@@ -8,6 +8,8 @@ Demo & more infos: [Thread](https://twitter.com/cyrildiagne/status/1256916982764
 
 ⚠️ This is a research prototype and not a consumer / photoshop user tool.
 
+**Update 2020.05.11:** If you're looking for an easy to use app based on this research, head over to https://arcopypaste.app
+
 ## Modules
 
 This prototype runs as 3 independent modules:
@@ -32,6 +34,8 @@ This prototype runs as 3 independent modules:
 ### 1 - Configure Photoshop
 
 - Go to "Preferences > Plug-ins", enable "Remote Connection" and set a friendly password that you'll need later.
+- Make sure that your PS document settings match those in ```server/src/ps.py```, otherwise only an empty layer will be pasted.
+- Also make sure that your document has some sort of background. If the background is just blank, SIFT will probably not have enough feature to do a correct match.
 
 <!--
 ### 2) Setup the local server
@@ -48,6 +52,8 @@ pip install -r requirements.txt
 BASNet model (Qin & al, CVPR 2019) as an external HTTP service using this [BASNet-HTTP wrapper](https://github.com/cyrildiagne/basnet-http) (requires a CUDA GPU)
 
 - You will need the deployed service URL to configure the local server
+
+- Make sure to configure a different port if you're running BASNet on the same computer as the local service
 
 ### 3 - Configure and run the local server
 

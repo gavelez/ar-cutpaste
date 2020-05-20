@@ -79,7 +79,7 @@ def save():
     with open('cut_mask.png', 'wb') as f:
         f.write(res.content)
         # shutil.copyfileobj(res.raw, f)
-    
+
     logging.info(' > opening mask...')
     mask = Image.open('cut_mask.png').convert("L")
 
@@ -165,7 +165,11 @@ def paste():
         logging.info(' > sending to photoshop...')
         name = datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
         img_path = os.path.join(os.getcwd(), 'cut_current.png')
-        ps.paste(img_path, name, x, y, password=args.photoshop_password)
+        err = ps.paste(img_path, name, x, y, password=args.photoshop_password)
+        if err is not None:
+            logging.error('error sending to photoshop')
+            logging.error(err)
+            jsonify({'status': 'error sending to photoshop'})
     else:
         logging.info('screen not found')
 
